@@ -1,5 +1,25 @@
-Apigility Skeleton Application
+Datawarehouse
 ==============================
+
+Introduction
+------------
+This is a REST based datawarehouse application created with https://apigility.org.
+
+Routes
+------------
+
+Admin UI
+
+    http://datawarehouse
+    
+REST services
+
+    http://datawarehouse/user
+    http://datawarehouse/packages
+
+RPC services
+
+    http://datawarehouse/marketing
 
 Requirements
 ------------
@@ -9,45 +29,39 @@ Please see the [composer.json](composer.json) file.
 Installation
 ------------
 
-### Via release tarball
+    git clone https://github.com/ATDDWorkshop/datawarehouse.git
 
-Grab the latest release via the [Apigility website](http://apigility.org/)
-and/or the [releases page](https://github.com/zfcampus/zf-apigility-skeleton/releases).
-At the time of this writing, that URI is:
+Assuming you already have Composer:
 
-- https://github.com/zfcampus/zf-apigility-skeleton/releases/download/0.9.1/zf-apigility-skeleton-0.9.1.tgz
+    composer.phar install
 
-Untar it:
+Add a alias to your /etc/hosts
 
-```bash
-tar xzf zf-apigility-skeleton-0.9.1.tgz
-```
+    127.0.0.1   datawarehouse
 
-### Via Composer (create-project)
+Create mysql database
 
-You can use the `create-project` command from [Composer](http://getcomposer.org/)
-to create the project in one go:
+    mysql -h hostname -u user --password=password < ATDD.sql
+    
+Configure DB adapter in config/autoload/local.php
 
-```bash
-curl -s https://getcomposer.org/installer | php --
-php composer.phar create-project -sdev zfcampus/zf-apigility-skeleton path/to/install
-```
-
-### Via Git (clone)
-
-First, clone the repository:
-
-```bash
-git clone https://github.com/zfcampus/zf-apigility-skeleton.git # optionally, specify the directory in which to clone
-cd path/to/install
-```
-
-At this point, you need to use [Composer](https://getcomposer.org/) to install
-dependencies. Assuming you already have Composer:
-
-```bash
-composer.phar install
-```
+    <?php
+    return array(
+        'db' => array(
+            'adapters' => array(
+                'ATDD' => array(
+                    'driver' => 'Pdo_Mysql',
+                    'database' => 'ATDD',
+                    'username' => 'myuser',
+                    'password' => 'mypassword',
+                    'hostname' => 'localhost',
+                ),
+            ),
+        ),
+    );
+    
+    
+    
 
 ### All methods
 
