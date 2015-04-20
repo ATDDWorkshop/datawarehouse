@@ -34,10 +34,8 @@ class CampaignTable {
             $select->from('User');
             $select->group('User.campaign');
             $statement = $sql->prepareStatementForSqlObject($select);
-            $results = $statement->execute();
-            foreach($results as $campaign){
-                array_push($this->campaigns,$campaign);
-            }
+            $this->campaigns = iterator_to_array($statement->execute());
+
         }
         return $this->campaigns;
     }
