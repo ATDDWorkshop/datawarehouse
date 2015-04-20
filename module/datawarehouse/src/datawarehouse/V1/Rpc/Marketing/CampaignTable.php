@@ -12,25 +12,29 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Expression;
 
-class CampaignTable {
+class CampaignTable
+{
 
     protected $campaigns;
     protected $dbAdapter;
 
 
-    public function __construct(Adapter $dbAdapter){
-        $this->dbAdapter=$dbAdapter;
+    public function __construct(Adapter $dbAdapter)
+    {
+        $this->dbAdapter = $dbAdapter;
     }
 
-    public function fetchAll(){
-        if(!$this->campaigns){
 
-            $this->campaigns=array();
+    public function fetchAll()
+    {
+        if (!$this->campaigns) {
+
+            $this->campaigns = array();
             $dbAdapter = $this->dbAdapter;
 
             $sql = new Sql($dbAdapter);
             $select = $sql->select();
-            $select->columns(array('campaign',"regs"=>new Expression('COUNT(id)'),"revenue"=>new Expression('SUM(revenue)')));
+            $select->columns(array('campaign', "regs" => new Expression('COUNT(id)'), "revenue" => new Expression('SUM(revenue)')));
             $select->from('User');
             $select->group('User.campaign');
             $statement = $sql->prepareStatementForSqlObject($select);
@@ -39,7 +43,6 @@ class CampaignTable {
         }
         return $this->campaigns;
     }
-
 
 
 }

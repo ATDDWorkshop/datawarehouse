@@ -12,23 +12,21 @@ namespace datawarehouse\V1\Rest\User;
 use ZF\Apigility\DbConnectedResource;
 use Zend\Paginator\Adapter\DbTableGateway as TableGatewayPaginator;
 
-class UserResource extends DbConnectedResource{
+class UserResource extends DbConnectedResource
+{
     public function fetchAll($data = array())
     {
         $where = '';
-        if($data->name)
-        {
-            $where .= "name='".$data->name."'";
+        if ($data->name) {
+            $where .= "name='" . $data->name . "'";
         }
 
-        if($data->password)
-        {
-            $where .= " AND password='".$data->password."'";
+        if ($data->password) {
+            $where .= " AND password='" . $data->password . "'";
         }
 
 
-
-        $adapter = new TableGatewayPaginator($this->table,$where);
+        $adapter = new TableGatewayPaginator($this->table, $where);
         return new $this->collectionClass($adapter);
     }
 }
