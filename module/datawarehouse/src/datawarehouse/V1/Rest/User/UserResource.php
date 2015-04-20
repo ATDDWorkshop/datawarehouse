@@ -15,7 +15,6 @@ use Zend\Paginator\Adapter\DbTableGateway as TableGatewayPaginator;
 class UserResource extends DbConnectedResource{
     public function fetchAll($data = array())
     {
-        // WHERE CLAUSE
         $where = '';
         if($data->name)
         {
