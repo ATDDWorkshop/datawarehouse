@@ -12,8 +12,7 @@ class MarketingController extends AbstractActionController
     protected function getCampaignTable(){
         if(!$this->campaignTable){
             $config=$this->getServiceLocator()->get('config');
-            $this->campaignTable = new CampaignTable();
-            $this->campaignTable->setDbAdapterConfig($config["db"]["adapters"]["ATDD"]);
+            $this->campaignTable = new CampaignTable($config["db"]["adapters"]["ATDD"]);
         }
         return $this->campaignTable;
     }

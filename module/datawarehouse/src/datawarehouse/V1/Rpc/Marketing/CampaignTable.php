@@ -17,15 +17,14 @@ class CampaignTable {
     protected $campaigns;
     protected $dbAdapterConfig;
 
-    public function setDbAdapterConfig($dbAdapterConfig){
+
+    public function __construct($dbAdapterConfig){
         $this->dbAdapterConfig=$dbAdapterConfig;
     }
 
     public function fetchAll(){
         if(!$this->campaigns){
-            if(!$this->dbAdapterConfig){
-                throw new \Exception("No dbAdapterConfig");
-            }
+
             $this->campaigns=array();
             $dbAdapter = new Adapter($this->dbAdapterConfig);
 
