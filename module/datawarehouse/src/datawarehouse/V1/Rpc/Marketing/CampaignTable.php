@@ -15,18 +15,18 @@ use Zend\Db\Sql\Expression;
 class CampaignTable {
 
     protected $campaigns;
-    protected $dbAdapterConfig;
+    protected $dbAdapter;
 
 
-    public function __construct($dbAdapterConfig){
-        $this->dbAdapterConfig=$dbAdapterConfig;
+    public function __construct(Adapter $dbAdapter){
+        $this->dbAdapter=$dbAdapter;
     }
 
     public function fetchAll(){
         if(!$this->campaigns){
 
             $this->campaigns=array();
-            $dbAdapter = new Adapter($this->dbAdapterConfig);
+            $dbAdapter = $this->dbAdapter;
 
             $sql = new Sql($dbAdapter);
             $select = $sql->select();
